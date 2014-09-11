@@ -2,25 +2,19 @@
 <html>
 <head>
   <title>Demo for Web Components</title>
-  <!-- <link rel="import" type="text/html" href="import.html" async> -->
+  <link rel="import" type="text/html" href="import.html">
 </head>
 <body>
-  <!-- <button onclick="alert(importElement.import)">Check</button> -->
 
   <script>
-    // var importElement = document.querySelector('link[rel="import"]');
-    var importElement = document.createElement('link');
-    importElement.rel = 'import';
-    importElement.href = 'import.html';
-    document.head.appendChild(importElement);
-    alert(importElement.import);
-    importElement.onload = function () {
-      alert(importElement.import);
-      // InvalidStateError
-      // importElement.import.open();
-      // importElement.import.write();
-      // importElement.import.close();
-    };
+    var importElement = document.querySelector('link[rel="import"]');
+    var import2Element = importElement.import.querySelector('link[rel="import"]');
+    var import3Element = import2Element.import.querySelector('link[rel="import"]');
+    alert(importElement.import.head.innerHTML);
+    alert(importElement.import.body.innerHTML);
+    alert(import2Element.import.head.innerHTML);
+    alert(import2Element.import.body.innerHTML);
+    alert(import3Element.import.body.innerHTML);
   </script>
 
 </body>
