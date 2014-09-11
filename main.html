@@ -2,14 +2,21 @@
 <html>
 <head>
   <title>Demo for Web Components</title>
-  <link rel="import" type="text/html" href="import.html" async>
+  <!-- <link rel="import" type="text/html" href="import.html" async> -->
 </head>
 <body>
-  <button onclick="alert(importElement.import)">Check</button>
+  <!-- <button onclick="alert(importElement.import)">Check</button> -->
 
   <script>
-    var importElement = document.querySelector('link[rel="import"]');
+    // var importElement = document.querySelector('link[rel="import"]');
+    var importElement = document.createElement('link');
+    importElement.rel = 'import';
+    importElement.href = 'import.html';
+    document.head.appendChild(importElement);
     alert(importElement.import);
+    importElement.onload = function () {
+      alert(importElement.import);
+    };
   </script>
 
 </body>
