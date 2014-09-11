@@ -15,8 +15,8 @@
   <h1>Hello World</h1>
 
   <script>
-    // var importElement = document.querySelector('link[rel="import"]');
-    // alert(importElement.import.body.innerHTML);
+    var importElement = document.querySelector('link[rel="import"]');
+    document.body.appendChild(importElement.import.body.querySelector('p').cloneNode(true));
   </script>
 
 </body>
