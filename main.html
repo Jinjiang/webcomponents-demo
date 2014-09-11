@@ -16,6 +16,10 @@
     alert(importElement.import);
     importElement.onload = function () {
       alert(importElement.import);
+      // InvalidStateError
+      // importElement.import.open();
+      // importElement.import.write();
+      // importElement.import.close();
     };
   </script>
 
