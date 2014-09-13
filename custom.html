@@ -54,33 +54,60 @@
     </menu>
   </dropdown-menu>
 
-  <script>
-    var list = Array.prototype.slice.call(document.querySelectorAll('dropdown-menu'));
-    list.forEach(function (dropdown) {
-      var shown = false;
-      var btn = dropdown.querySelector('button');
-      var menu = dropdown.querySelector('menu');
+  <script data-version="traditional">
+    // var list = Array.prototype.slice.call(document.querySelectorAll('dropdown-menu'));
+    // list.forEach(function (dropdown) {
+    //   var shown = false;
+    //   var btn = dropdown.querySelector('button');
+    //   var menu = dropdown.querySelector('menu');
 
-      function checkDisplay() {
-        menu.style.display = shown ? 'block' : 'none';
-      }
+    //   function checkDisplay() {
+    //     menu.style.display = shown ? 'block' : 'none';
+    //   }
 
-      btn.onclick = function () {
-        shown = !shown;
-        checkDisplay();
-      };
-      menu.onclick = function () {
-        shown = false;
-        checkDisplay();
-      }
+    //   btn.onclick = function () {
+    //     shown = !shown;
+    //     checkDisplay();
+    //   };
+    //   menu.onclick = function () {
+    //     shown = false;
+    //     checkDisplay();
+    //   }
+    // });
+  </script>
+
+  <script data-version="custom-elements">
+    var proto = Object.create(HTMLElement.prototype, {
+      shown: {
+        get: function () {
+          return this.querySelector('menu').style.display === 'block';
+        },
+        set: function (v) {
+          this.querySelector('menu').style.display = v ? 'block' : 'none';
+        }
+      },
+      attachedCallback: {
+        value: function () {
+          var self = this;
+          this.querySelector('button').onclick = function () {
+            self.shown = !self.shown;
+          };
+          this.querySelector('menu').onclick = function () {
+            self.shown = false;
+          };
+        }
+      },
     });
+
+    document.registerElement('dropdown-menu', {prototype: proto});
   </script>
 
   <script>
-    // // var dropdown = new DropDownElement();
-    // var dropdown = document.createElement('dropdown-menu');
-    // dropdown.innerHTML = '...';
-    // document.body.appendChild(dropdown);
+    // var dropdown = new DropDownElement();
+    var dropdown = document.createElement('dropdown-menu');
+    dropdown.innerHTML = '<button>X</button>' +
+    '<menu><li>Item</li><li>Item</li></menu>';
+    document.body.appendChild(dropdown);
   </script>
 
 </body>
