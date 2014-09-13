@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo for Custom Elements</title>
+</head>
+<body>
+
+  <!-- imagination about custom elements -->
+
+  <taobao-list>
+    <taobao-item item-id="67890" shop-id="52">
+      <h1>Macbook Pro</h1>
+      <ul>
+        <li>厂商：Apple</li>
+        <li>售价：￥15000</li>
+      </ul>
+    </taobao-item>
+  </taobao-list>
+
+  <script>
+    // var item = new TaobaoItemElement();
+    var item = document.createElement('taobao-item');
+    item.itemId = '12345';
+    item.innerHTML = '...';
+    document.querySelector('taobao-list').appendChild(item);
+  </script>
+
+</body>
+</html>
