@@ -16,9 +16,11 @@
       padding: 5px 10px;
       min-width: 80px;
     }
+    dropdown-menu:unresolved menu {
+      display: none;
+    }
     dropdown-menu menu {
       min-width: 80px;
-      display: none;
       position: absolute;
       top: 100%;
       left: 0;
@@ -77,6 +79,7 @@
   </script>
 
   <script data-version="custom-elements">
+    // alert();
     var proto = Object.create(HTMLElement.prototype, {
       shown: {
         get: function () {
@@ -89,6 +92,7 @@
       attachedCallback: {
         value: function () {
           var self = this;
+          self.shown = false;
           this.querySelector('button').onclick = function () {
             self.shown = !self.shown;
           };
