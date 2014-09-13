@@ -2,27 +2,80 @@
 <html>
 <head>
   <title>Demo for Custom Elements</title>
+  <style>
+    button {
+      background-color: #f90;
+      border-radius: 3px;
+      color: white;
+      font-size: 100%;
+      border: 1px solid gray;
+      box-shadow: 1px 1px 2px rgba(127, 127, 127, 0.5);
+      padding: 5px 10px;
+      min-width: 80px;
+    }
+    dropdown-menu {
+      position: relative;
+    }
+    dropdown-menu menu {
+      min-width: 80px;
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      background-color: white;
+      border: 1px solid gray;
+      box-shadow: 1px 1px 2px rgba(127, 127, 127, 0.5);
+      white-space: nowrap;
+    }
+    dropdown-menu menu li {
+      margin: 0;
+      padding: 5px 10px;
+    }
+    dropdown-menu menu li:hover {
+      background-color: gray;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
   <!-- imagination about custom elements -->
 
-  <taobao-list>
-    <taobao-item item-id="67890" shop-id="52">
-      <h1>Macbook Pro</h1>
-      <ul>
-        <li>厂商：Apple</li>
-        <li>售价：￥15000</li>
-      </ul>
-    </taobao-item>
-  </taobao-list>
+  <dropdown-menu>
+    <button>菜单</button>
+    <menu>
+      <li>打开</li>
+      <li>剪切</li>
+      <li>复制</li>
+      <li>删除</li>
+    </menu>
+  </dropdown-menu>
 
   <script>
-    // var item = new TaobaoItemElement();
-    var item = document.createElement('taobao-item');
-    item.itemId = '12345';
-    item.innerHTML = '...';
-    document.querySelector('taobao-list').appendChild(item);
+    var list = Array.prototype.slice.call(document.querySelectorAll('dropdown-menu'));
+    list.forEach(function (dropdown) {
+      var shown = false;
+      var btn = dropdown.querySelector('button');
+      var menu = dropdown.querySelector('menu');
+      btn.onclick = function () {
+        shown = !shown;
+        menu.style.display = shown ? 'block' : 'none';
+      };
+      menu.onclick = function () {
+        shown = false;
+        menu.style.display = shown ? 'block' : 'none';
+      }
+    });
+  </script>
+
+  <script>
+    // var dropdown = new DropDownElement();
+    var dropdown = document.createElement('dropdown-menu');
+    dropdown.innerHTML = '...';
+    document.body.appendChild(dropdown);
   </script>
 
 </body>
