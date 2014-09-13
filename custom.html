@@ -60,13 +60,18 @@
       var shown = false;
       var btn = dropdown.querySelector('button');
       var menu = dropdown.querySelector('menu');
+
+      function checkDisplay() {
+        menu.style.display = shown ? 'block' : 'none';
+      }
+
       btn.onclick = function () {
         shown = !shown;
-        menu.style.display = shown ? 'block' : 'none';
+        checkDisplay();
       };
       menu.onclick = function () {
         shown = false;
-        menu.style.display = shown ? 'block' : 'none';
+        checkDisplay();
       }
     });
   </script>
