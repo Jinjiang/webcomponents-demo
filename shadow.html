@@ -2,33 +2,20 @@
 <html>
 <head>
   <title>Demo for Shadow DOM</title>
+  <link rel="import" href="weird-details.html">
 </head>
 <body>
 
-  <details>
-    <summary>Shadow DOM</summary>
+  <weird-details>
+    <h2>Shadow DOM</h2>
     <p>这份规范描述了一种把多个 DOM 树结合进入一个层级结构中，并且这些树可以在同一份文档中交互的方法。这使得 DOM 结构能够更好的组合。</p>
     <p>请移步至 <a href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/">Shadow DOM 101</a> 阅读这份非正式性介绍。</p>
-  </details>
+  </weird-details>
 
   <script>
-    var details = document.querySelector('details');
-    var summary = document.querySelector('summary');
-
-    var shadowRootOlder = details.createShadowRoot();
-    shadowRootOlder.innerHTML = '<button style="float: right;">复制到剪切板</button><content select="p"></content>';
-
-    var shadowRootYounger = details.createShadowRoot();
-    shadowRootYounger.innerHTML = '<dl>' +
-      '<dt><content select="summary"></content><dt>' +
-      '<dd><shadow></shadow><dd>' +
-    '</dl>';
-
-    console.log(summary.getDestinationInsertionPoints());
-    console.log(shadowRootYounger.host);
-    console.log(shadowRootYounger.olderShadowRoot);
-    console.log(shadowRootYounger.querySelector('content').getDistributedNodes());
-    console.log(shadowRootYounger.querySelector('shadow').getDistributedNodes());
+    var newElement = document.createElement('weird-details');
+    newElement.innerHTML = '<p>文档树是指根结点是文档的结点树。</p>';
+    document.body.appendChild(newElement);
   </script>
 
 </body>

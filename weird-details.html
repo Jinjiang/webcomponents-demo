@@ -1,0 +1,36 @@
+<script>
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function () {
+        var shadowRootOlder = this.createShadowRoot();
+        shadowRootOlder.innerHTML = '<button style="float: right;">复制到剪切板</button><content select="p"></content>';
+
+        var shadowRootYounger = this.createShadowRoot();
+        shadowRootYounger.innerHTML = '<dl>' +
+          '<dt><content select="h2"><h2>查看详情</h2></content><dt>' +
+          '<dd><shadow></shadow><dd>' +
+        '</dl>';
+
+        // console.log(summary.getDestinationInsertionPoints());
+        // console.log(shadowRootYounger.host);
+        // console.log(shadowRootYounger.olderShadowRoot);
+        // console.log(shadowRootYounger.querySelector('content').getDistributedNodes());
+        // console.log(shadowRootYounger.querySelector('shadow').getDistributedNodes());
+
+        var dt = shadowRootYounger.querySelector('dt');
+        var dd = shadowRootYounger.querySelector('dd');
+
+        // actions
+        dt.style.cursor = 'pointer';
+        dt.addEventListener('mousedown', function (e) {
+          e.preventDefault();
+        });
+        dt.addEventListener('click', function (e) {
+          dd.style.display = (dd.style.display === 'none') ? 'block' : 'none';
+        });
+      }
+    }
+  });
+
+  document.registerElement('weird-details', {prototype: proto});
+</script>
