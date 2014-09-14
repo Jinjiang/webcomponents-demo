@@ -23,6 +23,12 @@
       '<dt><content select="summary"></content><dt>' +
       '<dd><shadow></shadow><dd>' +
     '</dl>';
+
+    console.log(summary.getDestinationInsertionPoints());
+    console.log(shadowRootYounger.host);
+    console.log(shadowRootYounger.olderShadowRoot);
+    console.log(shadowRootYounger.querySelector('content').getDistributedNodes());
+    console.log(shadowRootYounger.querySelector('shadow').getDistributedNodes());
   </script>
 
 </body>
