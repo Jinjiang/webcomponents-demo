@@ -15,10 +15,14 @@
     var details = document.querySelector('details');
     var summary = document.querySelector('summary');
 
-    var shadowRoot = details.createShadowRoot();
-    shadowRoot.innerHTML =
-        '<hr><div style="background: yellow;"><content select="summary"></content></div>' +
-        '<hr><blockquote><content select="p"></content></blockquote><hr>';
+    var shadowRootOlder = details.createShadowRoot();
+    shadowRootOlder.innerHTML = '<button style="float: right;">复制到剪切板</button><content select="p"></content>';
+
+    var shadowRootYounger = details.createShadowRoot();
+    shadowRootYounger.innerHTML = '<dl>' +
+      '<dt><content select="summary"></content><dt>' +
+      '<dd><shadow></shadow><dd>' +
+    '</dl>';
   </script>
 
 </body>
