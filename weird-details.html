@@ -1,21 +1,33 @@
+<template id="template-description">
+  <style>
+    button {float: right; color: #999;}
+    :host(weird-details) button {text-decoration: underline;}
+  </style>
+  <button>复制到剪切板</button><content select="p"></content>
+</template>
+
+<template id="template-main">
+  <dl>
+    <dt><content select="h2"><h2>查看详情</h2></content><dt>
+    <dd><shadow></shadow><dd>
+  </dl>
+</template>
+
 <script>
+  var currentDocument = document.currentScript.ownerDocument;
+
+  function getTemplate(selector) {
+    return currentDocument.querySelector(selector).content.cloneNode(true);
+  }
+
   var proto = Object.create(HTMLElement.prototype, {
     createdCallback: {
       value: function () {
         var shadowRootOlder = this.createShadowRoot();
-        shadowRootOlder.innerHTML = '<button style="float: right;">复制到剪切板</button><content select="p"></content>';
+        shadowRootOlder.appendChild(getTemplate('#template-description'));
 
         var shadowRootYounger = this.createShadowRoot();
-        shadowRootYounger.innerHTML = '<dl>' +
-          '<dt><content select="h2"><h2>查看详情</h2></content><dt>' +
-          '<dd><shadow></shadow><dd>' +
-        '</dl>';
-
-        // console.log(summary.getDestinationInsertionPoints());
-        // console.log(shadowRootYounger.host);
-        // console.log(shadowRootYounger.olderShadowRoot);
-        // console.log(shadowRootYounger.querySelector('content').getDistributedNodes());
-        // console.log(shadowRootYounger.querySelector('shadow').getDistributedNodes());
+        shadowRootYounger.appendChild(getTemplate('#template-main'));
 
         var dt = shadowRootYounger.querySelector('dt');
         var dd = shadowRootYounger.querySelector('dd');

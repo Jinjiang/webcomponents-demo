@@ -3,8 +3,13 @@
 <head>
   <title>Demo for Shadow DOM</title>
   <link rel="import" href="weird-details.html">
+  <style>
+    body /deep/ button {font-style: italic;}
+  </style>
 </head>
 <body>
+
+  <button>normal button</button>
 
   <weird-details>
     <h2>Shadow DOM</h2>
