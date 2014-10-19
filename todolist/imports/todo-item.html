@@ -7,7 +7,9 @@
     button:focus {outline: 0;}
     button:active {box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;}
     button[disabled] {border: none; background-image: none; opacity: 0.40; cursor: not-allowed; box-shadow: none;}
+    #item-root {padding: 0.5em;}
     #item-root[checked] #label {text-decoration: line-through;}
+    #item-root:hover {background: rgba(225, 225, 225, 0.2);}
   </style>
   <div id="item-root" horizontal layout>
     <input type="checkbox" self-center>
