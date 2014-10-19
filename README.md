@@ -57,7 +57,7 @@ All demos I wrote about Web Components
 
 ## Todo List Demo
 
-基于 Web Components 规范实现的一个简单的 Todo List
+基于 Web Components 规范实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/todolist)
 
 ### branch
 
