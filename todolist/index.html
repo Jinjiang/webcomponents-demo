@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Todo List with Web Components</title>
+
+  <link rel="import" href="imports/layout.html">
+  <link rel="import" href="imports/add-box.html">
+  <link rel="import" href="imports/todo-list.html">
+
+  <style>
+    #wrapper {width: 480px;}
+    todo-list {margin: 0.1em; display: block;}
+  </style>
+
+</head>
+<body vertical layout center>
+
+  <div id="wrapper">
+    <h1>Todo List</h1>
+
+    <add-box value="bug fixing"></add-box>
+    <todo-list></todo-list>
+
+    <p>Powered by <a href="http://w3c-html-ig-zh.github.io/webcomponents/" target="_blank">Web Components</a></p>
+  </div>
+
+  <script>
+    (function () {
+      var addBox = document.querySelector('add-box');
+      var todoList = document.querySelector('todo-list');
+
+      addBox.addEventListener('add-item', function (e) {
+        todoList.addItem(e.detail);
+      });
+    })();
+  </script>
+
+</body>
+</html>

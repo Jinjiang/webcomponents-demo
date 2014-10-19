@@ -1,0 +1,90 @@
+<link rel="import" href="todo-item.html">
+
+<template id="template-main">
+  <style>
+    #item-list {border: 1px #ccc solid; padding: 0.5em; border-radius: 2px; min-height: 10em;}
+  </style>
+  <div id="item-list" vertical layout></div>
+</template>
+
+<script>
+  (function (global) {
+    var currentDocument = document.currentScript.ownerDocument;
+
+    function getTemplate(selector) {
+      return currentDocument.querySelector(selector).content.cloneNode(true);
+    }
+
+    var addItemWithoutSave = function (data) {
+      var self = this;
+      var listRoot = this.listRoot;
+      var item = document.createElement('todo-item');
+      item.data = data;
+      listRoot.appendChild(item);
+      item.addEventListener('remove-item', function (e) {
+        listRoot.removeChild(item);
+        self.save();
+      });
+      item.addEventListener('toggle-item', function (e) {
+        self.save();
+      });
+    };
+
+    var save = function () {
+      var data = this.data;
+      localStorage.setItem('myTodoList', JSON.stringify(data));
+    };
+
+    var dataDefinition = {
+      get: function () {
+        var listRoot = this.listRoot;
+        var items = Array.prototype.slice.call(listRoot.querySelectorAll('todo-item'));
+        var result = items.map(function (item) {
+          return item.data;
+        });
+        return result;
+      },
+      set: function (data) {
+        if (!Array.isArray(data)) {
+          return;
+        }
+        var self = this;
+        var listRoot = this.listRoot;
+        listRoot.innerHTML = '';
+        data.forEach(function (itemData) {
+          if (itemData) {
+            self.addItemWithoutSave(itemData);
+          }
+        });
+      }
+    };
+
+    var createdCallback = function () {
+      var self = this;
+
+      var shadowRoot = this.createShadowRoot();
+      shadowRoot.appendChild(getTemplate('#template-main'));
+
+      var listRoot = shadowRoot.querySelector('#item-list');
+      this.listRoot = listRoot;
+
+      var data = JSON.parse(localStorage.getItem('myTodoList'));
+      this.data = data;
+    };
+
+    var proto = Object.create(HTMLElement.prototype, {
+      addItem: {value: function (data) {
+        this.addItemWithoutSave(data);
+        this.save();
+      }},
+      addItemWithoutSave: {value: addItemWithoutSave},
+      save: {value: save},
+      data: dataDefinition,
+      createdCallback: {value: createdCallback}
+    });
+
+    var TodoListHTMLElement = document.registerElement('todo-list', {prototype: proto});
+
+    global.TodoListHTMLElement = TodoListHTMLElement;
+  })(this);
+</script>

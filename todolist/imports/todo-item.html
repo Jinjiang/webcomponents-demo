@@ -1,0 +1,117 @@
+<template id="template-main">
+  <style>
+    input, #label, button {font-size: 20px; line-height: 2; padding: 0 0.5em;}
+    button {color: #fff; background-color: rgb(0, 120, 231); border: none rgba(0, 0, 0, 0); border-radius: 2px; transition: 0.1s linear box-shadow;}
+    button:hover,
+    button:focus {background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));}
+    button:focus {outline: 0;}
+    button:active {box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;}
+    button[disabled] {border: none; background-image: none; opacity: 0.40; cursor: not-allowed; box-shadow: none;}
+    #item-root[checked] #label {text-decoration: line-through;}
+  </style>
+  <div id="item-root" horizontal layout>
+    <input type="checkbox" self-center>
+    <div id="label" flex></div>
+    <button>X</button>
+  </div>
+</template>
+
+<script>
+  (function (global) {
+    var currentDocument = document.currentScript.ownerDocument;
+
+    function getTemplate(selector) {
+      return currentDocument.querySelector(selector).content.cloneNode(true);
+    }
+
+    var dataDefinition = {
+      get: function () {
+        return {
+          label: this.label,
+          checked: this.checked
+        };
+      },
+      set: function (data) {
+        var label = data.label || '';
+        var checked = !!data.checked;
+
+        this.label = label;
+        this.checked = checked;
+      }
+    };
+
+    var checkedDefinition = {
+      get: function () {
+        return !!this.checkbox.checked;
+      },
+      set: function (v) {
+        this.checkbox.checked = !!v;
+        if (!!v) {
+          this.itemRoot.setAttribute('checked', 'checked');
+        }
+        else {
+          this.itemRoot.removeAttribute('checked');
+        }
+      }
+    };
+
+    var labelDefinition = {
+      get: function () {
+        return this.labelElement.innerText;
+      },
+      set: function (v) {
+        this.labelElement.innerText = v || '';
+      }
+    };
+
+    var onCreatedDefinition = {
+      value: function () {
+        var self = this;
+
+        var shadowRoot = this.createShadowRoot();
+        shadowRoot.appendChild(getTemplate('#template-main'));
+
+        var itemRoot = shadowRoot.querySelector('#item-root');
+        var checkbox = shadowRoot.querySelector('input');
+        var button = shadowRoot.querySelector('button');
+        var labelElement = shadowRoot.querySelector('#label');
+
+        this.itemRoot = itemRoot;
+        this.checkbox = checkbox;
+        this.button = button;
+        this.labelElement = labelElement;
+
+        checkbox.addEventListener('change', function (e) {
+          var evt;
+          self.checked = !!self.checked;
+          if (self.checked) {
+            evt = new CustomEvent('close-item', {detail: self.data});
+          }
+          else {
+            evt = new CustomEvent('open-item', {detail: self.data});
+          }
+          self.dispatchEvent(evt);
+
+          evt = new CustomEvent('toggle-item', {detail: self.data});
+          self.dispatchEvent(evt);
+        });
+        button.addEventListener('click', function (e) {
+          var evt;
+          evt = new CustomEvent('remove-item', {detail: self.data});
+          self.dispatchEvent(evt);
+        });
+      }
+    };
+
+    var proto = Object.create(HTMLElement.prototype, {
+      data: dataDefinition,
+      checked: checkedDefinition,
+      label: labelDefinition,
+      createdCallback: onCreatedDefinition
+    });
+
+    var TodoItemHTMLElement = document.registerElement('todo-item', {prototype: proto});
+
+    global.TodoItemHTMLElement = TodoItemHTMLElement;
+  })(this);
+</script>

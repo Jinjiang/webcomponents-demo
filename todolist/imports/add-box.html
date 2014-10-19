@@ -1,0 +1,87 @@
+<template id="template-main">
+  <style>
+    input, button {font-size: 20px; line-height: 2; padding: 0 0.5em;}
+    button {color: #fff; background-color: rgb(0, 120, 231); border: none rgba(0, 0, 0, 0); border-radius: 2px; transition: 0.1s linear box-shadow;}
+    button:hover,
+    button:focus {background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));}
+    button:focus {outline: 0;}
+    button:active {box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;}
+    button[disabled] {border: none; background-image: none; opacity: 0.40; cursor: not-allowed; box-shadow: none;}
+  </style>
+  <div horizontal layout>
+    <input flex><button>ADD</button>
+  </div>
+</template>
+
+<script>
+  (function (global) {
+    var currentDocument = document.currentScript.ownerDocument;
+
+    function getTemplate(selector) {
+      return currentDocument.querySelector(selector).content.cloneNode(true);
+    }
+
+    var valueDefinition = {
+      get: function () {
+        var input = this.input;
+        return input ? input.value : '';
+      },
+      set: function (v) {
+        var input = this.input;
+        input && (input.value = v);
+      }
+    };
+
+    var addDefinition = {
+      value: function (e) {
+        var value = this.value;
+        var evt;
+        if (value) {
+          evt = new CustomEvent('add-item', {detail: {label: value}});
+          this.dispatchEvent(evt);
+          this.value = '';
+        }
+      }
+    };
+
+    var onCreatedDefinition = {
+      value: function () {
+        var defaultValue = this.getAttribute('value');
+        var self = this;
+
+        var shadowRoot = this.createShadowRoot();
+        shadowRoot.appendChild(getTemplate('#template-main'));
+
+        var input = shadowRoot.querySelector('input');
+        var button = shadowRoot.querySelector('button');
+
+        this.input = input;
+        this.button = button;
+
+        if (defaultValue) {
+          this.value = defaultValue;
+        }
+
+        input.addEventListener('keypress', function (e) {
+          if (e.keyCode === 13) {
+            self.add(e);
+          }
+        });
+        button.addEventListener('click', function (e) {
+          self.add(e);
+          self.input.focus();
+        });
+      }
+    };
+
+    var proto = Object.create(HTMLElement.prototype, {
+      value: valueDefinition,
+      add: addDefinition,
+      createdCallback: onCreatedDefinition
+    });
+
+    var AddBoxHTMLElement = document.registerElement('add-box', {prototype: proto});
+
+    global.AddBoxHTMLElement = AddBoxHTMLElement;
+  })(this);
+</script>
