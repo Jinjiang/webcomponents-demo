@@ -4,7 +4,7 @@ All demos I wrote about Web Components
 
 ## HTML Imports
 
-[Web Components 视频介绍](www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 HTML Imports
+[Web Components 视频介绍](http://www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 HTML Imports
 
 ### branch
 
@@ -23,7 +23,7 @@ All demos I wrote about Web Components
 
 ## Custom Elements
 
-[Web Components 视频介绍](www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 Custom Elements
+[Web Components 视频介绍](http://www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 Custom Elements
 
 ### branch
 
@@ -40,7 +40,7 @@ All demos I wrote about Web Components
 
 ## Shadow DOM
 
-[Web Components 视频介绍](www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 Shadow DOM
+[Web Components 视频介绍](http://www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 Shadow DOM
 
 ### branch
 
