@@ -1,5 +1,9 @@
 # Web Components Demo
 
+在项目名字里杯具的把 webcomponents 给拼错了 - -
+
+鉴于 url 已经分享出去了，就不改了，请 @随机 见谅
+
 All demos I wrote about Web Components
 
 ## HTML Imports
