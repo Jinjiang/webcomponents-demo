@@ -63,8 +63,7 @@ All demos I wrote about Web Components
 
 基于 Web Components 规范实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/todolist)
 
-### branch
+## Polymer Todo List Demo
 
-* todolist
-
+基于 Polymer 实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/polymer-todolist/)
 
