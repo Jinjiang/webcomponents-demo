@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Todo List with Polymer</title>
+
+  <!-- <link rel="import" href="http://docs.polymerchina.org/components/polymer/polymer.html"> -->
+  <link rel="import" href="imports/add-box.html">
+  <link rel="import" href="imports/todo-list.html">
+
+  <style>
+    #wrapper {width: 480px;}
+    todo-list {margin: 1em 0; display: block;}
+  </style>
+
+</head>
+<body vertical layout center>
+
+  <div id="wrapper">
+    <h1>Todo List</h1>
+
+    <add-box value="bug fixing"></add-box>
+    <todo-list></todo-list>
+
+    <p>Powered by <a href="http://docs.polymerchina.org/" target="_blank">Polymer</a></p>
+  </div>
+
+  <script>
+    (function () {
+      var addBox = document.querySelector('add-box');
+      var todoList = document.querySelector('todo-list');
+
+      addBox.addEventListener('add-item', function (e) {
+        todoList.addItem(e.detail);
+      });
+    })();
+  </script>
+
+</body>
+</html>
