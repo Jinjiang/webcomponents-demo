@@ -1,0 +1,70 @@
+<link rel="import" href="http://docs.polymerchina.org/components/polymer/polymer.html">
+<link rel="import" href="todo-item.html">
+
+<polymer-element name="todo-list">
+
+  <template>
+    <style>
+      #item-list {border: 1px #ccc solid; border-radius: 2px; min-height: 10em;}
+    </style>
+    <div id="item-list" vertical layout></div>
+  </template>
+
+  <script>
+    (function () {
+      var proto = {
+        domReady: function() {
+          this.data = JSON.parse(localStorage.getItem('myTodoList'));
+        },
+        save: function () {
+          localStorage.setItem('myTodoList', JSON.stringify(this.data));
+        },
+        addItemWithoutSave: function (data) {
+          var self = this;
+          var itemList = this.$['item-list'];
+          var item = document.createElement('todo-item');
+          item.data = data
+          itemList.appendChild(item);
+          item.addEventListener('remove-item', function (e) {
+            itemList.removeChild(item);
+            self.save();
+          });
+          item.addEventListener('toggle-item', function (e) {
+            self.save();
+          });
+        },
+        addItem: function (data) {
+          this.addItemWithoutSave(data);
+          this.save();
+        }
+      };
+
+      Object.defineProperty(proto, 'data', {
+        get: function () {
+          var itemList = this.$['item-list'];
+          var items = Array.prototype.slice.call(itemList.querySelectorAll('todo-item'));
+          var result = items.map(function (item) {
+            return item.data;
+          });
+          return result;
+        },
+        set: function (data) {
+          if (!Array.isArray(data)) {
+            return;
+          }
+          var self = this;
+          var itemList = this.$['item-list'];
+          itemList.innerHTML = '';
+          data.forEach(function (itemData) {
+            if (itemData) {
+              self.addItemWithoutSave(itemData);
+            }
+          });
+        }
+      });
+
+      Polymer('todo-list', proto);
+    })();
+  </script>
+
+</polymer-element>
