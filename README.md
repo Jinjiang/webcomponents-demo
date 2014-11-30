@@ -6,6 +6,18 @@
 
 All demos I wrote about Web Components
 
+## CanIUse
+
+对 Web Components 相关特性的检测 [Can I Use](http://jinjiang.github.io/webcompoents-demo/caniuse.html)
+
+## Polymer Todo List Demo
+
+基于 Polymer 实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/polymer-todolist/)
+
+## Todo List Demo
+
+基于 Web Components 规范实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/todolist)
+
 ## HTML Imports
 
 [Web Components 视频介绍](http://www.tudou.com/plcover/r0pA0z77CgM/)的配套 demo 之 HTML Imports
@@ -58,12 +70,4 @@ All demos I wrote about Web Components
 * shadow4
 * shadow5
 * shadow6
-
-## Todo List Demo
-
-基于 Web Components 规范实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/todolist)
-
-## Polymer Todo List Demo
-
-基于 Polymer 实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/polymer-todolist/)
 
