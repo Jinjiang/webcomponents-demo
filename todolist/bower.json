@@ -1,5 +1,5 @@
 {
-  "name": "polymer-todolist",
+  "name": "webcomponents-todolist",
   "dependencies": {
     "webcomponentsjs": "~0.4.2"
   }

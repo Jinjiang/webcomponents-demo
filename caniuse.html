@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+
+  <title>Chrome Version Check</title>
+  <style>
+    body {font-family: Monaco, Consolas;}
+  </style>
+
+</head>
+<body>
+
+<script>
+  function log() {
+    var output = Array.prototype.join.call(arguments, ', ') + '<br>';
+    document.write(output);
+  }
+  var match = navigator.userAgent.match(/chrome\/(\d+)/i);
+  var version;
+  if (match) {
+    version = match[1];
+    log('Chrome version', version);
+  }
+  else {
+    log('NOT Chrome core');
+  }
+
+  var hasTemplate = window.hasOwnProperty('HTMLTemplateElement');
+
+  var el = document.createElement('link');
+  el.rel = 'import';
+  var hasImport = el.hasOwnProperty('import');
+
+  var hasCustom = Document.prototype.hasOwnProperty('registerElement');
+
+  var hasShasow = Element.prototype.hasOwnProperty('createShadowRoot');
+
+  log('has template', hasTemplate);
+  log('has import', hasImport);
+  log('has custom element', hasCustom);
+  log('has shadow dom', hasShasow);
+
+  if (hasTemplate && hasImport && hasCustom && hasShasow) {
+    log('Congratulations! All webcomponents feature supported!');
+  }
+  else {
+    log('Oops, webcomponents not ready :-(');
+  }
+</script>
+
+</body>
+</html>
