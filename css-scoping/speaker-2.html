@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+
+  <title>cssconf-speaker</title>
+
+  <link rel="import" href="http://docs.polymerchina.org/components/polymer/polymer.html">
+
+  <polymer-element name="cssconf-speaker" attributes="name, description, photo, link" noscript>
+    <template>
+      <style>
+        :host {display: block;}
+
+        :host(:hover) .photo {
+          -webkit-transform: rotateY(180deg);
+          -o-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+        }
+
+        /* :host(selector) -> show by host attribute */
+        :host([gender="female"]) figure {
+          background-color: pink;
+        }
+
+        figure {
+          text-align: center;
+        }
+
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+
+        .photo {
+          position: relative;
+          -webkit-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+        }
+        .photo img {
+          border-radius: 50%;
+          max-width: 60%;
+        }
+
+        figcaption {
+          font-size: 16px;
+          padding: 10px;
+        }
+        figcaption h3 {
+          font-size: 16px;
+          margin: 0 0 5px;
+        }
+        figcaption span {
+          color: rgba(0,0,0,0.6);
+        }
+      </style>
+      <figure>
+        <a href="{{link}}" target="_blank">
+          <div class="photo">
+            <img src="{{photo}}" alt="{{name}}">
+          </div>
+          <figcaption>
+            <h3>{{name}}</h3>
+            <span>{{description}}</span>
+          </figcaption>
+        </a>
+      </figure>
+    </template>
+  </polymer-element>
+
+</head>
+<body>
+
+<cssconf-speaker
+  gender="female"
+  name="一丝（李杰）"
+  description="阿里妈妈前端工程师"
+  link="https://github.com/yisibl"
+  photo="speaker-yisi.jpg"></cssconf-speaker>
+
+</body>
+</html>
