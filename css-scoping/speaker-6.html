@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+
+  <title>cssconf-speaker</title>
+
+  <link rel="import" href="http://docs.polymerchina.org/components/polymer/polymer.html">
+
+  <polymer-element name="cssconf-speaker-photo" attributes="name, photo" noscript>
+    <template>
+      <style>
+        :host {
+          display: block;
+          position: relative;
+          -webkit-transition: all .2s ease-in-out;
+          -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+        }
+        img {
+          border-radius: 50%;
+          max-width: 60%;
+        }
+      </style>
+      <img src="{{photo}}" alt="{{name}}">
+    </template>
+  </polymer-element>
+
+  <polymer-element name="cssconf-speaker-caption" attributes="name, description" noscript>
+    <template>
+      <style>
+        :host {
+          display: block;
+          font-size: 16px;
+          padding: 10px;
+        }
+        :host h3 {
+          font-size: 16px;
+          margin: 0 0 5px;
+        }
+        :host span {
+          color: rgba(0,0,0,0.6);
+        }
+      </style>
+      <h3>{{name}}</h3>
+      <span>{{description}}</span>
+    </template>
+  </polymer-element>
+
+  <polymer-element name="cssconf-speaker" attributes="name, description, photo, link" noscript>
+    <template>
+      <style>
+        :host {display: block;}
+
+        figure {
+          text-align: center;
+        }
+
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+
+        cssconf-speaker-photo::shadow img {
+          max-width: 200px;
+        }
+        cssconf-speaker-caption::shadow h3 {
+          font-size: 24px;
+        }
+      </style>
+      <figure>
+        <a href="{{link}}" target="_blank">
+
+          <cssconf-speaker-photo name="{{name}}" photo="{{photo}}">
+          </cssconf-speaker-photo>
+
+          <cssconf-speaker-caption name="{{name}}" description="{{description}}">
+          </cssconf-speaker-caption>
+
+        </a>
+      </figure>
+    </template>
+  </polymer-element>
+
+  <style>
+    /* /deep/ -> wherever and however deeply the component shadow distribute */
+    body /deep/ span {color: green;}
+    body /deep/ cssconf-speaker-photo:hover::shadow img {
+      box-shadow: 0 0 5px 5px rgba(127,127,127,0.5);
+    }
+  </style>
+
+</head>
+<body>
+
+<cssconf-speaker
+  gender="female"
+  name="一丝（李杰）"
+  description="阿里妈妈前端工程师"
+  link="https://github.com/yisibl"
+  photo="speaker-yisi.jpg"></cssconf-speaker>
+
+</body>
+</html>
