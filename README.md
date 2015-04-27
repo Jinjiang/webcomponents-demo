@@ -4,15 +4,15 @@ All demos I wrote about Web Components
 
 ## CanIUse
 
-对 Web Components 相关特性的检测 [Can I Use](http://jinjiang.github.io/webcompoents-demo/caniuse.html)
+对 Web Components 相关特性的检测 [Can I Use](http://jinjiang.github.io/webcomponents-demo/caniuse.html)
 
 ## Polymer Todo List Demo
 
-基于 Polymer 实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/polymer-todolist/)
+基于 Polymer 实现的一个简单的 [Todo List](http://jinjiang.github.io/webcomponents-demo/polymer-todolist/)
 
 ## Todo List Demo
 
-基于 Web Components 规范实现的一个简单的 [Todo List](http://jinjiang.github.io/webcompoents-demo/todolist)
+基于 Web Components 规范实现的一个简单的 [Todo List](http://jinjiang.github.io/webcomponents-demo/todolist)
 
 ## HTML Imports
 
